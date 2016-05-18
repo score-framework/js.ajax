@@ -1,0 +1,17 @@
+{
+    "test_framework" : "mocha",
+    "test_path": "test/index.html",
+    "browsers": [
+        "firefox_previous",
+        "firefox_latest",
+        "chrome_previous",
+        "chrome_latest",
+        "safari_previous",
+        "safari_latest",
+        "opera_previous",
+        "opera_latest",
+        "ie_previous",
+        "ie_latest",
+        "edge_latest"
+    ]
+}
