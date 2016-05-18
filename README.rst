@@ -11,7 +11,7 @@ score.ajax
 
 .. _js_ajax:
 
-Ajax handling for The SCORE Framework.
+Asynchronous JavaScript and XML (AJAX) handling for The SCORE Framework.
 
 This module is a work in progress, thus currently poorly documented :-/
 
