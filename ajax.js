@@ -78,6 +78,8 @@
             request.send(options.data || '');
         };
 
+        return ajax;
+
     });
 
 });
