@@ -85,6 +85,8 @@
             request.send(options.data || '');
         };
 
+        ajax.__version__ = '0.0.2';
+
         return ajax;
 
     });
