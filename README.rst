@@ -47,7 +47,7 @@ server response. You can find a good documentation of the
 Callback
 --------
 
-Internet explorer does not provide a promises_, you will either have to use a
+Internet explorer does not provide promises_, you will either have to use a
 polyfill, or use the callback-based API of this module:
 
 .. code-block:: javascript
