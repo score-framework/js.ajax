@@ -1,3 +1,6 @@
+.. image:: https://raw.githubusercontent.com/score-framework/py.doc/master/docs/score-banner.png
+    :target: http://score-framework.org
+
 `The SCORE Framework`_ is a collection of harmonized python and javascript
 libraries for the development of large scale web projects. Powered by strg.at_.
 
@@ -11,9 +14,76 @@ score.ajax
 
 .. _js_ajax:
 
-Asynchronous JavaScript and XML (AJAX) handling for The SCORE Framework.
+A small helper for managing AJAX requests.
 
-This module is a work in progress, thus currently poorly documented :-/
+Quickstart
+==========
+
+.. code-block:: html
+
+    <script src="score.init.js"></script>
+    <script src="score.ajax.js"></script>
+    <script>
+        score.ajax('/api/fruits').then(function(result) {
+            for (var i = 0; i < result.length; i++) {
+                console.log('Initiating self-defense against ' + result[i]);
+            }
+        });
+    </script>
+
+Details
+=======
+
+Return value
+------------
+
+The return value of this function depends on the `Content-Type`_ header of the
+server response. You can find a good documentation of the
+`XMLHttpRequest.response`_ types on MDN.
+
+.. _Content-Type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+.. _XMLHttpRequest.response: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/response
+
+Callback
+--------
+
+Internet explorer does not provide a promises_, you will either have to use a
+polyfill, or use the callback-based API of this module:
+
+.. code-block:: javascript
+
+    score.ajax.callback('/api/fruits', function(result) {
+        for (var i = 0; i < result.length; i++) {
+            console.log('Initiating self-defense against ' + result[i]);
+        }
+    }, function() {
+        // this is the error callback
+        alert('Could not load fruits, nothing to defend against!');
+    });
+
+If you are passing any options, you must provide them *before* the callback:
+
+.. code-block:: javascript
+
+    score.ajax.callback('/api/fruits', {headers: {'X-Spam': 'spam!'}}, function(result) {
+        ...
+
+.. _promises: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+Options
+-------
+
+You can pass an options object after the URL. The following keys are currently
+supported:
+
+* ``method``: An HTTP verb to use (i.e. "POST", "PUT", etc.) Defaults to "GET".
+* ``headers``: An object mapping HTTP headers to values. These will be sent as
+  part of the request. Note that you cannot set certain headers (you can find
+  the `list of forbidden headers`_ on MDN). Also note, that it is also possible
+  to perform `cross-domain AJAX requests`_, albeit with heavy restrictions.
+  
+.. _CROSS-domain AJAX requests: https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+.. _list of forbidden headers: https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_header_name
 
 
 License
