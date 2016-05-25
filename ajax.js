@@ -62,7 +62,14 @@
             request.onreadystatechange = function() {
                 if (request.readyState == 4) {
                     if (request.status == 200) {
-                        successCallback(request.responseText);
+                        var response = request.response;
+                        if (typeof response == 'undefined') {
+                            response = request.responseText;
+                            if (request.getResponseHeader('Content-Type').trim().substr(0, 16) == 'application/json') {
+                                response = JSON.parse(response);
+                            }
+                        }
+                        successCallback(response);
                     } else if (errorCallback) {
                         errorCallback(request.status);
                     }
