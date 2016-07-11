@@ -71,7 +71,7 @@
                         }
                         successCallback(response);
                     } else if (errorCallback) {
-                        errorCallback(request.status);
+                        errorCallback(new Error('Unexpected status code ' + request.status));
                     }
                 }
             };
