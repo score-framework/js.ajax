@@ -62,8 +62,10 @@
             request.onreadystatechange = function() {
                 if (request.readyState == 4) {
                     if (request.status == 200) {
-                        var response = request.response;
-                        if (typeof response == 'undefined') {
+                        var response;
+                        if (request.responseType && typeof request.response != 'undefined') {
+                            response = request.response;
+                        } else {
                             response = request.responseText;
                             if (request.getResponseHeader('Content-Type').trim().substr(0, 16) == 'application/json') {
                                 response = JSON.parse(response);
