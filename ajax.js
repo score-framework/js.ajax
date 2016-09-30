@@ -78,11 +78,12 @@
                 }
             };
             request.open(options.method || 'GET', url, true);
-            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             if (options.headers) {
                 for (var key in options.headers) {
                     request.setRequestHeader(key, options.headers[key]);
                 }
+            } else {
+                request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             }
             request.send(options.data || '');
         };
