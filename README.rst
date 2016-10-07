@@ -81,7 +81,10 @@ supported:
   part of the request. Note that you cannot set certain headers (you can find
   the `list of forbidden headers`_ on MDN). Also note, that it is also possible
   to perform `cross-domain AJAX requests`_, albeit with heavy restrictions.
-  
+* ``crossDomain``: By default the `'X-Requested-With': 'XMLHttpRequest'` header
+  will always be set. Setting this value to `true` will override that
+  behaviour.
+
 .. _CROSS-domain AJAX requests: https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 .. _list of forbidden headers: https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_header_name
 
