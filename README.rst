@@ -77,6 +77,8 @@ You can pass an options object after the URL. The following keys are currently
 supported:
 
 * ``method``: An HTTP verb to use (i.e. "POST", "PUT", etc.) Defaults to "GET".
+* ``data``: The body of the request. Can be anything accepted by
+  `XMLHttpRequest.send()`_
 * ``headers``: An object mapping HTTP headers to values. These will be sent as
   part of the request. Note that you cannot set certain headers (you can find
   the `list of forbidden headers`_ on MDN). Also note, that it is also possible
@@ -87,6 +89,7 @@ supported:
 
 .. _CROSS-domain AJAX requests: https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 .. _list of forbidden headers: https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_header_name
+.. _XMLHttpRequest.send(): https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send
 
 
 License
