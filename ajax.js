@@ -57,6 +57,8 @@
                 errorCallback = successCallback;
                 successCallback = options;
                 options = {};
+            } else if (!options) {
+                options = {};
             }
             var request = new XMLHttpRequest();
             request.onreadystatechange = function() {
