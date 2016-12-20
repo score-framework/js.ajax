@@ -21,9 +21,9 @@ function loadScoreModule(module, callback) {
     if (testConf[module] === 'local') {
         url = '../' + module + '.js';
     } else if (testConf[module]) {
-        url = 'https://raw.githubusercontent.com/score-framework/js.' + module + '/' + testConf[module] + '/' + module + '.js';
+        url = 'https://cdn.rawgit.com/score-framework/js.' + module + '/' + testConf[module] + '/' + module + '.js';
     } else {
-        url = 'https://raw.githubusercontent.com/score-framework/js.' + module + '/master/' + module + '.js';
+        url = 'https://cdn.rawgit.com/score-framework/js.' + module + '/master/' + module + '.js';
     }
     loadScript(url, callback);
 }
