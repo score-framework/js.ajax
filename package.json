@@ -24,9 +24,6 @@
     "url": "https://github.com/score-framework/js.ajax/issues"
   },
   "homepage": "https://github.com/score-framework/js.ajax#readme",
-  "dependencies": {
-      "score.init": "0.0.x"
-  },
   "devDependencies": {
       "mocha": "2.x.x",
       "expect.js": "0.3.x",
