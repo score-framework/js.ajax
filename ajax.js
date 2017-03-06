@@ -1,5 +1,5 @@
 /**
- * Copyright © 2015,2016 STRG.AT GmbH, Vienna, Austria
+ * Copyright © 2015-2017 STRG.AT GmbH, Vienna, Austria
  *
  * This file is part of the The SCORE Framework.
  *
@@ -89,7 +89,7 @@
         request.send(options.data || '');
     };
 
-    ajax.__version__ = '0.0.6';
+    ajax.__version__ = '0.1.0';
 
     return ajax;
 
