@@ -32,69 +32,65 @@
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['score.init'], factory);
+        define(factory);
     } else if (typeof module === 'object' && module.exports) {
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like environments that support module.exports,
         // like Node.
-        factory(require('score.init'));
+        module.exports = factory();
     } else {
         // Browser globals (root is window)
-        factory(root.score);
+        root.score.extend('ajax', [], factory);
     }
-})(this, function(score) {
+})(this, function() {
 
-    score.extend('ajax', [], function() {
+    var ajax = function(url, options) {
+        return new Promise(function(resolve, reject) {
+            return ajax.callback(url, options, resolve, reject);
+        });
+    };
 
-        var ajax = function(url, options) {
-            return new Promise(function(resolve, reject) {
-                return ajax.callback(url, options, resolve, reject);
-            });
-        };
-
-        ajax.callback = function(url, options, successCallback, errorCallback) {
-            if (typeof options == 'function') {
-                errorCallback = successCallback;
-                successCallback = options;
-                options = {};
-            } else if (!options) {
-                options = {};
-            }
-            var request = new XMLHttpRequest();
-            request.onreadystatechange = function() {
-                if (request.readyState === XMLHttpRequest.DONE) {
-                    if (request.status == 200) {
-                        var response;
-                        if (request.responseType && typeof request.response != 'undefined') {
-                            response = request.response;
-                        } else {
-                            response = request.responseText;
-                            if (request.getResponseHeader('Content-Type').trim().substr(0, 16) == 'application/json') {
-                                response = JSON.parse(response);
-                            }
+    ajax.callback = function(url, options, successCallback, errorCallback) {
+        if (typeof options == 'function') {
+            errorCallback = successCallback;
+            successCallback = options;
+            options = {};
+        } else if (!options) {
+            options = {};
+        }
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (request.readyState === XMLHttpRequest.DONE) {
+                if (request.status == 200) {
+                    var response;
+                    if (request.responseType && typeof request.response != 'undefined') {
+                        response = request.response;
+                    } else {
+                        response = request.responseText;
+                        if (request.getResponseHeader('Content-Type').trim().substr(0, 16) == 'application/json') {
+                            response = JSON.parse(response);
                         }
-                        successCallback(response);
-                    } else if (errorCallback) {
-                        errorCallback(new Error('Unexpected status code ' + request.status));
                     }
-                }
-            };
-            request.open(options.method || 'GET', url, true);
-            if (!options.crossDomain) {
-                request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            }
-            if (options.headers) {
-                for (var key in options.headers) {
-                    request.setRequestHeader(key, options.headers[key]);
+                    successCallback(response);
+                } else if (errorCallback) {
+                    errorCallback(new Error('Unexpected status code ' + request.status));
                 }
             }
-            request.send(options.data || '');
         };
+        request.open(options.method || 'GET', url, true);
+        if (!options.crossDomain) {
+            request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        }
+        if (options.headers) {
+            for (var key in options.headers) {
+                request.setRequestHeader(key, options.headers[key]);
+            }
+        }
+        request.send(options.data || '');
+    };
 
-        ajax.__version__ = '0.0.6';
+    ajax.__version__ = '0.0.6';
 
-        return ajax;
-
-    });
+    return ajax;
 
 });
