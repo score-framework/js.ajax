@@ -80,6 +80,9 @@
         request.open(options.method || 'GET', url, true);
         if (!options.crossDomain) {
             request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        } else {
+            // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Requests_with_credentials
+            request.withCredentials = true;
         }
         if (options.headers) {
             for (var key in options.headers) {
