@@ -50,6 +50,13 @@
         });
     };
 
+    ajax.Error = function(request, message) {
+        this.request = request;
+        Error.call(this, message);
+    };
+
+    ajax.Error.prototype = Object.create(Error.prototype);
+
     ajax.callback = function(url, options, successCallback, errorCallback) {
         if (typeof options == 'function') {
             errorCallback = successCallback;
@@ -73,7 +80,7 @@
                     }
                     successCallback(response);
                 } else if (errorCallback) {
-                    errorCallback(new Error('Unexpected status code ' + request.status));
+                    errorCallback(new ajax.Error(request, 'Unexpected status code ' + request.status));
                 }
             }
         };
