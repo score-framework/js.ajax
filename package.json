@@ -1,6 +1,6 @@
 {
   "name": "score.ajax",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Asynchronous JavaScript and XML (AJAX) handling for The SCORE Framework",
   "main": "ajax.js",
   "directories": {

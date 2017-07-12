@@ -99,7 +99,7 @@
         request.send(options.data || '');
     };
 
-    ajax.__version__ = '0.1.1';
+    ajax.__version__ = '0.1.2';
 
     return ajax;
 
